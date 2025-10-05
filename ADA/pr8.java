@@ -1,5 +1,5 @@
 import java.util.*;
-public class pr8 {
+public class pr8_man {
     static int[] parent;
     static final int INF = 999999;
     static int find(int i) {
@@ -34,6 +34,7 @@ public class pr8 {
             }
         }
 
+        long startTime = System.nanoTime();
         System.out.println("\nEdges in the Minimum Cost Spanning Tree:");
         while (ne < n) {
             int min = INF, a = -1, b = -1, u = -1, v = -1;
@@ -58,10 +59,11 @@ public class pr8 {
 
             cost[a][b] = cost[b][a] = INF;
         }
+         long endTime = System.nanoTime();
+          double timeTaken = (endTime - startTime) / 1_000_000.0;
 
         System.out.println("\nMinimum cost of spanning tree = " + mincost);
+        System.out.printf("Execution Time: %.4f milliseconds\n", timeTaken);
         sc.close();
     }
 }
-
-
