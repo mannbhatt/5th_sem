@@ -1,3 +1,5 @@
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 public class pr5 {
@@ -15,7 +17,6 @@ public class pr5 {
             this.ratio = (double) value / weight;
         }
     }
-
 
     public static double fractionalKnapsack(int W, Item[] items) {
         Arrays.sort(items, (a, b) -> Double.compare(b.ratio, a.ratio));
@@ -36,7 +37,6 @@ public class pr5 {
                 break;
             }
         }
-
         return totalValue;
     }
 
@@ -73,22 +73,47 @@ public class pr5 {
             items[i] = new Item(i + 1, v, w);
         }
 
-        System.out.println("\nChoose Method:");
-        System.out.println("1. Fractional Knapsack (Greedy Optimal)");
-        System.out.println("2. 0/1 Knapsack (Greedy Approximation)");
-        System.out.print("Enter your choice: ");
-        int choice = sc.nextInt();
+        while (true) {
+            System.out.println("\nChoose Method:");
+            System.out.println("1. Fractional Knapsack (Greedy Optimal)");
+            System.out.println("2. 0/1 Knapsack (Greedy Approximation)");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
 
-        if (choice == 1) {
-            double result = fractionalKnapsack(W, items);
-            System.out.printf("\nMaximum value (Fractional) = %.2f\n", result);
-        } else if (choice == 2) {
-            int result = zeroOneKnapsackGreedy(W, items);
-            System.out.println("\nApproximate value (0/1 Greedy) = " + result);
-        } else {
-            System.out.println("Invalid choice!");
+            Instant start, end;
+
+            switch (choice) {
+                case 1:
+                    start = Instant.now();
+                    double resultFractional = fractionalKnapsack(W, items);
+                    end = Instant.now();
+
+                    System.out.printf("\nMaximum value (Fractional) = %.2f\n", resultFractional);
+                    Duration timeFractional = Duration.between(start, end);
+                    System.out.printf("Time needed: %.4f milliseconds\n", timeFractional.toNanos() / 1_000_000.0);
+                    break;
+
+                case 2:
+                    start = Instant.now();
+                    int resultGreedy = zeroOneKnapsackGreedy(W, items);
+                    end = Instant.now();
+
+                    System.out.println("\nApproximate value (0/1 Greedy) = " + resultGreedy);
+                    Duration timeGreedy = Duration.between(start, end);
+                    System.out.printf("Time needed: %.4f milliseconds\n", timeGreedy.toNanos() / 1_000_000.0);
+                    break;
+
+                case 3:
+                    System.out.println("Exiting program...");
+                    sc.close();  
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please enter 1, 2, or 3.");
+                    break;
+            }
         }
-
-        sc.close();
     }
 }
