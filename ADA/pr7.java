@@ -1,4 +1,7 @@
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
+
 public class pr7 {
 
     int minKey(int key[], Boolean mstSet[], int V) {
@@ -13,7 +16,8 @@ public class pr7 {
         return min_index;
     }
 
-    void printMST(int parent[], int graph[][], int V) {
+    long printMST(int parent[], int graph[][], int V) {
+        Instant start = Instant.now();
         int totalWeight = 0;
         System.out.println("\nEdge \tWeight");
         for (int i = 1; i < V; i++) {
@@ -21,9 +25,12 @@ public class pr7 {
             totalWeight += graph[parent[i]][i];
         }
         System.out.println("Total Minimum Cost of MST = " + totalWeight);
+        Instant end = Instant.now();
+        Duration totaldiff = Duration.between(start, end);
+        return totaldiff.toNanos();  
     }
 
-    void primMST(int graph[][], int V) {
+    long primMST(int graph[][], int V) {
         int parent[] = new int[V];
         int key[] = new int[V];
         Boolean mstSet[] = new Boolean[V];
@@ -33,8 +40,8 @@ public class pr7 {
             mstSet[i] = false;
         }
 
-        key[0] = 0;      
-        parent[0] = -1; 
+        key[0] = 0;
+        parent[0] = -1;
 
         for (int count = 0; count < V - 1; count++) {
             int u = minKey(key, mstSet, V);
@@ -48,7 +55,7 @@ public class pr7 {
             }
         }
 
-        printMST(parent, graph, V);
+        return printMST(parent, graph, V); 
     }
 
     public static void main(String[] args) {
@@ -67,7 +74,17 @@ public class pr7 {
         }
 
         pr7 t = new pr7();
-        t.primMST(graph, V);
+
+        // measure total algorithm execution time
+        Instant start = Instant.now();
+        long timeNano = t.primMST(graph, V);
+        Instant end = Instant.now();
+
+        Duration diff = Duration.between(start, end);
+        double totalMillis = diff.toNanos() / 1_000_000.0;
+
+        System.out.printf("\nTotal Execution Time: %.4f milliseconds\n", totalMillis);
+
+        sc.close();
     }
 }
-
