@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jQuery Image Slider</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+/* Slider container */
+.slider {
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Slides */
+.slides {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+.slides img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+/* Navigation buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.7);
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+.prev:hover, .next:hover {
+    background: rgba(255,255,255,1);
+}
+.prev { left: 15px; }
+.next { right: 15px; }
+
+/* Dots */
+.dots {
+    text-align: center;
+    padding: 15px 0;
+    background: rgba(0,0,0,0.05);
+    border-radius: 0 0 15px 15px;
+}
+.dots span {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.dots .active {
+    background: #333;
+}
+</style>
+</head>
+<body>
+
+<div class="slider">
+    <div class="slides">
+        <img src="https://picsum.photos/800/400?img=10" alt="Image 1">
+        <img src="https://picsum.photos/800/400?img=20" alt="Image 2">
+        <img src="https://picsum.photos/800/400?img=30" alt="Image 3">
+        <img src="https://picsum.photos/800/400?img=40" alt="Image 4">
+    </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+    <div class="dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    let currentIndex = 0;
+    const slides = $(".slides img");
+    const totalSlides = slides.length;
+
+    function showSlide(index){
+        if(index >= totalSlides) index = 0;
+        if(index < 0) index = totalSlides - 1;
+        $(".slides").css("transform", `translateX(${-index * 100}%)`);
+        $(".dot").removeClass("active");
+        $(".dot").eq(index).addClass("active");
+        currentIndex = index;
+    }
+
+    $(".next").click(function(){
+        showSlide(currentIndex + 1);
+    });
+
+    $(".prev").click(function(){
+        showSlide(currentIndex - 1);
+    });
+
+    $(".dot").click(function(){
+        const index = $(this).index();
+        showSlide(index);
+    });
+
+    // Auto slide every 4 seconds
+    setInterval(function(){
+        showSlide(currentIndex + 1);
+    }, 4000);
+});
+</script>
+
+</body>
+</html>

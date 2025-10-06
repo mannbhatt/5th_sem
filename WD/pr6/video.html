@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Gallery</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(120deg, #fff8e1, #ffffff);
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #ff9800;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    main {
+        padding: 30px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin-bottom: 25px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+    h2 {
+        color: #ff9800;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    video {
+        display: block;
+        margin: 0 auto;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+    }
+    p {
+        text-align: center;
+        font-size: 16px;
+        color: #444;
+    }
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #ff9800;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    a:hover {
+        background-color: #f57c00;
+    }
+</style>
+</head>
+<body>
+<header>🎬 Video Gallery</header>
+<main>
+    <p style="text-align: center;">Watch sample videos using HTML5 video tags.</p>
+
+    <div class="card">
+        <h2>Sample Video 1</h2>
+        <video controls>
+            <source src="sample-video1.mp4" type="video/mp4">
+            Your browser does not support the video element.
+        </video>
+    </div>
+
+    <div class="card">
+        <h2>Sample Video 2</h2>
+        <video controls>
+            <source src="sample-video2.webm" type="video/webm">
+            Your browser does not support the video element.
+        </video>
+    </div>
+
+    <p style="text-align: center;"><a href="audio.html">🎵 Go to Audio Gallery</a></p>
+</main>
+</body>
+</html>

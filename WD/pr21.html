@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Save Background Color in Cookie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            transition: background-color 0.5s;
+        }
+        input[type=text] {
+            padding: 8px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<h2>Set Background Color</h2>
+<input type="text" id="colorInput" placeholder="Enter color name">
+<button onclick="saveColor()">SAVE</button>
+<script>
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + d.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+function getCookie(name) {
+    let cname = name + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i=0; i<ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(cname) == 0) {
+            return c.substring(cname.length, c.length);
+        }
+    }
+    return "";
+}
+function saveColor() {
+    let color = document.getElementById('colorInput').value.trim();
+    if(color) {
+        setCookie('bgcolor', color, 365);
+        document.body.style.backgroundColor = color;
+        alert("Background color saved!");
+    } else {
+        alert("Please enter a color name.");
+    }
+}
+window.onload = function() {
+    let savedColor = getCookie('bgcolor');
+    if(savedColor) {
+        document.body.style.backgroundColor = savedColor;
+        document.getElementById('colorInput').value = savedColor;
+    }
+};
+</script>
+</body>
+</html>
+

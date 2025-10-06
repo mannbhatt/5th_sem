@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration Form</title>
+<style>
+    body { font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0; }
+    h1 { text-align: center; color: #333; background-color: #cce5ff; padding: 15px; }
+    form { width: 60%; margin: 30px auto; background-color: #fff; padding: 20px 40px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+    label { font-weight: bold; color: #333; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 6px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; }
+    input[type="radio"], input[type="checkbox"] { width: auto; margin-right: 5px; }
+    input[type="submit"] { background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; }
+    input[type="submit"]:hover { background-color: #0056b3; }
+</style>
+</head>
+<body>
+
+<h1>User Registration Form</h1>
+
+<form id="registrationForm" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" required>
+
+    <label>Gender:</label><br>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label>
+    <input type="radio" id="other" name="gender" value="other">
+    <label for="other">Other</label><br><br>
+
+    <label for="email">Email ID:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="mobile">Mobile No.:</label>
+    <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit number" required>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="4" required></textarea>
+
+    <label for="state">State:</label>
+    <select id="state" name="state" required>
+        <option value="">Select State</option>
+        <option value="gujarat">Gujarat</option>
+        <option value="maharashtra">Maharashtra</option>
+        <option value="karnataka">Karnataka</option>
+        <option value="delhi">Delhi</option>
+    </select>
+
+    <label for="education">Education:</label>
+    <select id="education" name="education" required>
+        <option value="">Select Education Level</option>
+        <option value="high-school">High School</option>
+        <option value="graduate">Graduate</option>
+        <option value="post-graduate">Post Graduate</option>
+    </select>
+
+    <label>Hobbies (Select multiple):</label><br>
+    <input type="checkbox" id="reading" name="hobbies" value="reading">
+    <label for="reading">Reading</label>
+    <input type="checkbox" id="sports" name="hobbies" value="sports">
+    <label for="sports">Sports</label>
+    <input type="checkbox" id="music" name="hobbies" value="music">
+    <label for="music">Music</label><br><br>
+
+    <label for="image">Upload Profile Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+
+    <input type="submit" value="Register">
+
+</form>
+
+<script>
+function validateForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked');
+    const state = document.getElementById('state').value;
+    const education = document.getElementById('education').value;
+    const hobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+    const image = document.getElementById('image').files[0];
+
+    // Name validation
+    if (!/^[A-Za-z\s]+$/.test(name)) {
+        alert("Please enter a valid name (letters and spaces only).");
+        return false;
+    }
+
+    // Email validation
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    // Mobile validation
+    if (!/^\d{10}$/.test(mobile)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return false;
+    }
+
+    // Gender validation
+    if (!gender) {
+        alert("Please select your gender.");
+        return false;
+    }
+
+    // State validation
+    if (state === "") {
+        alert("Please select your state.");
+        return false;
+    }
+
+    // Education validation
+    if (education === "") {
+        alert("Please select your education level.");
+        return false;
+    }
+
+    // Hobbies validation
+    if (hobbies.length === 0) {
+        alert("Please select at least one hobby.");
+        return false;
+    }
+
+    // Image validation
+    if (!image) {
+        alert("Please upload a profile image.");
+        return false;
+    }
+
+    alert("Form submitted successfully!");
+    return true; // Allow form submission
+}
+</script>
+
+</body>
+</html>

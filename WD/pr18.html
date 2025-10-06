@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration Model</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* Body & font */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #fff7ed, #fef3c7); /* soft warm gradient */
+}
+
+/* Form container */
+div.w-full.max-w-2xl {
+    border: 2px solid #fbbf24; /* warm yellow border */
+    background-color: #ffffffcc; /* slightly transparent */
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #f97316, #f59e0b); /* warm orange gradient */
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Form inputs */
+input, textarea, select {
+    border-width: 2px;
+    border-color: #fde68a; /* light yellow border */
+}
+input:focus, textarea:focus, select:focus {
+    border-color: #f59e0b; 
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+}
+
+/* Labels */
+label {
+    font-weight: 600;
+    color: #78350f; /* dark warm brown */
+}
+
+/* Buttons */
+button, input[type="submit"] {
+    background: linear-gradient(to right, #facc15, #eab308); /* golden gradient */
+    color: #1c1917;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+button:hover, input[type="submit"]:hover {
+    background: linear-gradient(to right, #eab308, #ca8a04);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* Checkbox & radio custom style */
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+    accent-color: #f97316; /* warm orange */
+}
+
+/* Entries display */
+#entries-display div.bg-white {
+    border-left: 4px solid #f59e0b; /* warm orange accent */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#entries-display div.bg-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Search input */
+#search-input {
+    border-width: 2px;
+    border-color: #fde68a;
+}
+#search-input:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+}
+
+/* Footer */
+footer {
+    background-color: #fff7ed;
+    color: #b45309;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+</style>
+
+</head>
+<body class="p-4 sm:p-8 flex justify-center items-center min-h-screen">
+<div class="w-full max-w-2xl bg-white shadow-2xl rounded-xl overflow-hidden">
+<header class="p-6 sm:p-8 bg-indigo-700 text-white">
+<h1 class="text-3xl font-extrabold tracking-tight text-center">
+                User Registration Portal
+</h1>
+<p class="text-indigo-200 text-center mt-1">Join our community today--quick and secure sign-up.</p>
+</header>
+<main class="p-6 sm:p-8">
+<form onsubmit="return listEntries(event)" class="space-y-6">
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="form-group">
+<label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+<input type="text" id="name" name="name" placeholder="E.g., Jane Doe" required
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+</div>
+<div class="form-group">
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email ID *</label>
+<input type="email" id="email" name="email" placeholder="you@example.com" required
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="form-group">
+<label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth *</label>
+<input type="date" id="dob" name="dob" required
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+</div>
+<div class="form-group">
+<label for="mobile" class="block text-sm font-medium text-gray-700 mb-1">Mobile No.</label>
+<input type="tel" id="mobile" name="mobile" placeholder="10 digits" pattern="[0-9]{10}"
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+</div>
+</div>
+<div class="form-group">
+<label for="address" class="block text-sm font-medium text-gray-700 mb-1">Full Address *</label>
+<textarea id="address" name="address" rows="3" placeholder="Street Address, City, Pincode" required
+                              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 resize-y transition duration-150"></textarea>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<div class="form-group">
+<label for="state" class="block text-sm font-medium text-gray-700 mb-1">State</label>
+<select id="state" name="state" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+<option value="">-- Select State --</option>
+<option value="ca">California</option>
+<option value="gujarat">Gujarat</option>
+<option value="ny">New York</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="education" class="block text-sm font-medium text-gray-700 mb-1">Education</label>
+<select id="education" name="education" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+<option value="">-- Select Level --</option>
+<option value="bachelor">Bachelor's Degree</option>
+<option value="master">Master's Degree</option>
+<option value="phd">PhD</option>
+</select>
+</div>
+<div class="form-group">
+<label class="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+<div class="flex items-center space-x-4 mt-2">
+<label class="inline-flex items-center">
+<input type="radio" name="gender" value="male" class="form-radio text-indigo-600 h-4 w-4" required>
+<span class="ml-2 text-gray-600 text-sm">Male</span>
+</label>
+<label class="inline-flex items-center">
+<input type="radio" name="gender" value="female" class="form-radio text-indigo-600 h-4 w-4">
+<span class="ml-2 text-gray-600 text-sm">Female</span>
+</label>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+<div class="form-group">
+<label for="image" class="block text-sm font-medium text-gray-700 mb-1">Upload Profile Image</label>
+<input type="file" id="image" name="profile_image" accept="image/*"
+                               class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition duration-150">
+</div>
+<div class="form-group flex items-center pt-2">
+<input type="checkbox" name="terms" value="agreed" id="terms" required
+                               class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+<label for="terms" class="ml-2 block text-sm text-gray-900">
+                            I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Terms</a> *
+</label>
+</div>
+</div>
+<div class="button-group pt-4">
+<button type="submit" 
+                            class="w-full md:w-1/2 mx-auto flex justify-center py-3 px-6 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
+                        Register Now
+</button>
+</div>
+</form>
+</main>
+<div id="output-list" class="p-6 sm:p-8 bg-gray-50 border-t border-gray-200">
+<div class="mb-6">
+<h2 class="text-xl font-semibold text-indigo-700 mb-2">Search Registered Users</h2>
+<input type="text" id="search-input" onkeyup="filterEntries()" placeholder="Start typing a name..."
+                       class="w-full p-3 border border-indigo-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+</div>
+<div id="entries-display">
+<h3 class="text-lg font-semibold text-gray-700 mb-4">Submitted Data List</h3>
+<p class="text-gray-500">Submit the form to see the registered entries listed here.</p>
+</div>
+</div>
+<footer class="p-4 bg-gray-100 text-center text-sm text-gray-600 rounded-b-xl">
+            Data display and search are implemented using client-side JavaScript.
+</footer>
+</div>
+<script>
+    let registeredEntries = [];
+    const getRadioValue = (name) => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+return checked ? checked.value : 'N/A';
+    };
+    const getValue = (id) => document.getElementById(id).value;
+    function renderEntries(entriesToRender = registeredEntries) {
+        const outputElement = document.getElementById('entries-display');
+        let listHtml = '';
+const headerText = entriesToRender === registeredEntries ? 
+            `Submitted Data List (${registeredEntries.length} entries)` :
+            `Search Results (${entriesToRender.length} entries found)`;
+        if (registeredEntries.length === 0) {
+            outputElement.innerHTML = `
+<h3 class="text-lg font-semibold text-gray-700 mb-4">Submitted Data List</h3>
+<p class="text-gray-500">No registrations recorded yet. Submit the form to add the first entry.</p>
+            `;
+            return;
+        }
+        if (entriesToRender.length === 0) {
+             outputElement.innerHTML = `<h3 class="text-lg font-semibold text-gray-700 mb-4">${headerText}</h3><p class="text-red-500">No matches found for your search term.</p>`;
+             return;
+        }
+        entriesToRender.forEach(record => {
+            const displayData = {
+                Name: record.name,
+                Email: record.email,
+                Gender: record.gender,
+                Education: record.education,
+            };
+
+            let recordDetailHtml = '<ul class="space-y-1 text-sm text-gray-700">';
+            for (const [key, value] of Object.entries(displayData)) {
+                recordDetailHtml += `<li class="flex justify-between items-start">
+<strong class="text-indigo-700 min-w-[100px]">${key}:</strong>
+<span class="text-right flex-1 break-words">${value}</span>
+</li>`;
+            }
+   recordDetailHtml += '</ul>';
+            listHtml += `
+<div id="record-${record.id}" class="bg-white p-4 rounded-lg shadow-md border border-gray-200 space-y-3 mb-4">
+                    ${recordDetailHtml}
+<div class="flex justify-end space-x-3 mt-3 border-t pt-2">
+<button onclick="handleEdit(${record.id})" 
+                                class="text-sm font-medium text-indigo-600 hover:text-indigo-800 transition duration-150 bg-indigo-100 px-3 py-1 rounded-md">
+                            Edit Name
+</button>
+<button onclick="handleDelete(${record.id})" 
+                                class="text-sm font-medium text-red-600 hover:text-red-800 transition duration-150 bg-red-100 px-3 py-1 rounded-md">
+                            Delete
+</button>
+</div>
+</div>
+            `;
+        });
+
+        outputElement.innerHTML = `
+<h3 class="text-lg font-semibold text-gray-700 mb-4">${headerText}</h3>
+            ${listHtml}
+        `;
+    }
+    function filterEntries() {
+        const searchTerm = document.getElementById('search-input').value.toLowerCase();
+
+        if (searchTerm.length < 1) {
+            renderEntries(registeredEntries);
+            return;
+        }
+        const filteredList = registeredEntries.filter(record =>
+            record.name.toLowerCase().includes(searchTerm)
+        );
+        renderEntries(filteredList);
+    }
+    function listEntries(event) {
+        event.preventDefault();
+        const name = getValue('name');
+        if (!name || !getValue('email') || !document.getElementById('terms').checked) {
+alert("Please fill in required fields (Name, Email, Terms) before submitting.");
+             return false;
+        }
+        const newRecord = {
+            id: Date.now(), 
+            name: name,
+            email: getValue('email'),
+            dob: getValue('dob'),
+            mobile: getValue('mobile') || 'N/A',
+            address: getValue('address'),
+            state: getValue('state') || 'N/A',
+            education: getValue('education') || 'N/A',
+            gender: getRadioValue('gender'),
+profileImage: document.getElementById('image').files[0] ? document.getElementById('image').files[0].name : 'No file uploaded',
+termsAgreed: document.getElementById('terms').checked ? 'Yes' : 'No',
+        };
+        registeredEntries.push(newRecord);
+        document.querySelector('form').reset();
+        renderEntries();
+        return false;
+    }
+    function handleDelete(id) {
+if (confirm("Are you sure you want to delete this registration? This action cannot be undone.")) {
+            registeredEntries = registeredEntries.filter(record => record.id !== id);
+
+            filterEntries(); 
+        }
+    }
+    function handleEdit(id) {
+        const recordToEdit = registeredEntries.find(record => record.id === id);
+
+        if (recordToEdit) {
+            const newName = prompt(`Editing record ID ${id}.\nEnter new Full Name:`, recordToEdit.name);
+
+if (newName !== null && newName.trim() !== "") {
+                const indexToUpdate = registeredEntries.findIndex(record => record.id === id);
+                registeredEntries[indexToUpdate].name = newName.trim();
+                filterEntries(); 
+            } else if (newName !== null) {
+alert("Name cannot be empty.");
+            }
+        }
+    }
+    document.addEventListener('DOMContentLoaded', renderEntries);
+</script>
+</body>
+</html>

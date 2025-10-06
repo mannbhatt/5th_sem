@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #f0f8ff;
+        color: #333;
+    }
+    input[type="number"] {
+        padding: 5px;
+        width: 100px;
+        margin: 5px;
+    }
+    button {
+        padding: 10px 15px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<h1>Simple Calculator</h1>
+
+<input type="number" id="num1" placeholder="Enter first number">
+<input type="number" id="num2" placeholder="Enter second number"><br>
+
+<button onclick="calculate('+')">Add</button>
+<button onclick="calculate('-')">Subtract</button>
+<button onclick="calculate('*')">Multiply</button>
+<button onclick="calculate('/')">Divide</button>
+
+<p id="result">Result: </p>
+
+<script>
+function calculate(operator) {
+    let num1 = parseFloat(document.getElementById('num1').value);
+    let num2 = parseFloat(document.getElementById('num2').value);
+    let res;
+
+    if (isNaN(num1) || isNaN(num2)) {
+        alert("Please enter valid numbers!");
+        return;
+    }
+
+    switch(operator) {
+        case '+':
+            res = num1 + num2;
+            break;
+        case '-':
+            res = num1 - num2;
+            break;
+        case '*':
+            res = num1 * num2;
+            break;
+        case '/':
+            if(num2 === 0) {
+                alert("Cannot divide by zero!");
+                return;
+            }
+            res = num1 / num2;
+            break;
+        default:
+            res = "Invalid operation";
+    }
+
+    document.getElementById('result').innerText = "Result: " + res;
+}
+</script>
+
+</body>
+</html>

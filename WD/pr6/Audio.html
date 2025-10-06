@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Gallery</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(120deg, #e3f2fd, #ffffff);
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #0d47a1;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    main {
+        padding: 30px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        margin-bottom: 25px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+    h2 {
+        color: #0d47a1;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    audio {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
+    }
+    p {
+        text-align: center;
+        font-size: 16px;
+        color: #444;
+    }
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #0d47a1;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    a:hover {
+        background-color: #1565c0;
+    }
+</style>
+</head>
+<body>
+<header>🎵 Audio Gallery</header>
+<main>
+    <p style="text-align: center;">Listen to relaxing sample audio tracks using HTML5 audio tags.</p>
+
+    <div class="card">
+        <h2>Sample Song 1</h2>
+        <audio controls>
+            <source src="sample-audio1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="card">
+        <h2>Sample Song 2</h2>
+        <audio controls>
+            <source src="sample-audio2.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <p style="text-align: center;"><a href="video.html">🎬 Go to Video Gallery</a></p>
+</main>
+</body>
+</html>
